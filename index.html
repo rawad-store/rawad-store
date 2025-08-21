@@ -459,7 +459,12 @@
             margin-bottom: 20px;
             color: #667eea;
         }
-
+        
+ <footer>
+  <a href="./privacy.html">سياسة الخصوصية</a> •
+  <a href="./terms.html">شروط الخدمة</a>
+</footer>
+        
         .social-links {
             display: flex;
             justify-content: center;
@@ -721,7 +726,7 @@
                     <h3>معلومات الاتصال</h3>
                     <p><i class="fas fa-map-marker-alt"></i> أمام سنترال الصوة - المجمع</p>
                     <p><i class="fas fa-phone"></i> +201126630356</p>
-                    <p><i class="fas fa-envelope"></i> info@rawadstore.com</p>
+                    <p><i class="fas fa-envelope"></i> tarek500500@gmail.com</p>
                 </div>
             </div>
             <div style="border-top: 1px solid #555; padding-top: 20px; margin-top: 30px;">
@@ -742,56 +747,63 @@
                 id: 1,
                 name: "طقم أدوات مدرسية كامل",
                 description: "يحتوي على جميع الأدوات الأساسية للطلاب",
-                price: 85,
+                price: 0,
                 icon: "fas fa-briefcase"
             },
             {
                 id: 2,
                 name: "كراسات وملفات دراسية",
                 description: "مجموعة متنوعة من الكراسات والملفات",
-                price: 45,
+                price: 0,
                 icon: "fas fa-book"
             },
             {
                 id: 3,
                 name: "أدوات رسم وتلوين",
                 description: "أقلام ملونة وألوان مائية وأدوات رسم",
-                price: 65,
+                price: 0,
                 icon: "fas fa-palette"
             },
             {
                 id: 4,
                 name: "حقيبة مدرسية عملية",
                 description: "حقائب متينة ومريحة لجميع الأعمار",
-                price: 120,
+                price: 0,
                 icon: "fas fa-backpack"
             },
             {
                 id: 5,
                 name: "آلة حاسبة علمية",
                 description: "آلات حاسبة متقدمة للمراحل العليا",
-                price: 95,
+                price: 0,
                 icon: "fas fa-calculator"
             },
             {
                 id: 6,
                 name: "مستلزمات طباعة",
                 description: "ورق طباعة وأحبار وملحقات",
-                price: 55,
+                price: 0,
                 icon: "fas fa-print"
             },
             {
                 id: 7,
                 name: "كتب مرجعية",
                 description: "كتب مساعدة ومراجع لجميع المواد",
-                price: 75,
+                price: 0,
                 icon: "fas fa-book-open"
             },
             {
                 id: 8,
                 name: "هدايا تذكارية",
                 description: "هدايا مميزة للمناسبات المدرسية",
-                price: 35,
+                price: 0,
+                icon: "fas fa-gift"
+                  },
+            {
+                id: 9,
+                name: "إكسسوارت قيمة",
+                description: "إكسسوارات مميزة للمناسبات",
+                price: 0,
                 icon: "fas fa-gift"
             }
         ];
@@ -1027,7 +1039,7 @@
                 animation: slideDown 0.5s ease;
             `;
             banner.innerHTML = `
-                🎉 عرض خاص: خصم 15% على جميع المنتجات! استخدم كود: RAWAD15
+                🎉 عرض خاص على جميع المنتجات
                 <button onclick="this.parentElement.remove()" style="background: none; border: none; color: white; float: left; font-size: 18px; cursor: pointer;">×</button>
             `;
             
@@ -1120,11 +1132,7 @@
                 opacity: 1;
             }
         }
-        <footer>
-  <a href="./privacy.html">سياسة الخصوصية</a> •
-  <a href="./terms.html">شروط الخدمة</a>
-</footer>
-
+       
     </style>
 </body>
 </html>
