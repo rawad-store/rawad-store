@@ -3161,55 +3161,236 @@ function clearWishlist() {
     }
 }
 
-        // 5. إتمام الطلب
-        function checkout() {
-        if (cart.length === 0) return;
-    
-        showLoading();
-    
-        setTimeout(() => {
-        let message = "مرحباً، أريد طلب المنتجات التالية:\n\n";
-        let total = 0;
-        let totalBeforeDiscount = 0;
-        
-        cart.forEach(item => {
-            const itemTotal = item.price * item.quantity;
-            const itemTotalBeforeDiscount = item.originalPrice * item.quantity;
-            total += itemTotal;
-            totalBeforeDiscount += itemTotalBeforeDiscount;
-            
-            message += `• ${item.name}\n`;
-            message += `  الكمية: ${item.quantity}\n`;
-            
-            if (item.discount > 0) {
-                message += `  السعر الأصلي: ${itemTotalBeforeDiscount} جنيه\n`;
-                message += `  السعر بعد الخصم: ${itemTotal} جنيه\n`;
-                message += `  (توفير: ${itemTotalBeforeDiscount - itemTotal} جنيه)\n`;
-            } else {
-                message += `  السعر: ${itemTotal} جنيه\n`;
+        // 5. إتمام الطلب بأسلوب عالمي فخم مع توافق كامل
+function checkout(options = {}) {
+    // التحقق من وجود عناصر في العربة
+    if (!cart || cart.length === 0) {
+        showNotification('🛒 عربة التسوق فارغة! أضف منتجاتك المفضلة أولاً 😊', 'error');
+        return false;
+    }
+
+    // استخراج الخيارات مع قيم افتراضية
+    const {
+        deliveryAddress = 'أمام سنترال الصوة - المجمع',
+        deliveryTime = '',
+        customerNote = '',
+        customerName = ''
+    } = options;
+
+    // التحقق من صحة العنوان
+    if (!deliveryAddress.trim()) {
+        showNotification('⚠️ الرجاء إدخال عنوان توصيل صالح', 'error');
+        return false;
+    }
+
+    // عرض مؤشر التحميل
+    showLoading();
+
+    // محاكاة معالجة الطلب
+    setTimeout(() => {
+        try {
+            // إنشاء الرسالة
+            let message = "🌟 *طلب جديد من متجركم الفاخر* 🌟\n";
+            message += `📅 *تاريخ الطلب*: ${new Date().toLocaleString('ar-EG', { dateStyle: 'short', timeStyle: 'short' })}\n`;
+            if (customerName.trim()) {
+                message += `👤 *اسم العميل*: ${customerName}\n`;
             }
-            
-            message += `\n`;
-        });
-        
-        message += `الإجمالي قبل الخصم: ${totalBeforeDiscount} جنيه\n`;
-        message += `الإجمالي بعد الخصم: ${total} جنيه\n`;
-        
-        if (totalBeforeDiscount > total) {
-            message += `وفرت: ${totalBeforeDiscount - total} جنيه\n`;
+            message += "━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n";
+            message += "🛍️ *قائمة المنتجات المختارة*:\n";
+
+            let total = 0;
+            let totalBeforeDiscount = 0;
+            const currency = "جنيه";
+
+            // تفاصيل المنتجات
+            cart.forEach((item, index) => {
+                if (!item.name || !item.price || !item.quantity || !item.originalPrice) {
+                    throw new Error(`بيانات المنتج ${index + 1} غير صالحة`);
+                }
+
+                const itemTotal = item.price * item.quantity;
+                const itemTotalBeforeDiscount = item.originalPrice * item.quantity;
+                total += itemTotal;
+                totalBeforeDiscount += itemTotalBeforeDiscount;
+
+                message += `🌟 *${index + 1}. ${item.name}*\n`;
+                message += `   ➤ *الكمية*: ${item.quantity} وحدة\n`;
+
+                if (item.discount > 0) {
+                    message += `   💵 *السعر الأصلي*: ${itemTotalBeforeDiscount.toFixed(2)} ${currency}\n`;
+                    message += `   🎁 *السعر بعد الخصم*: ${itemTotal.toFixed(2)} ${currency}\n`;
+                    message += `   💰 *توفير*: ${(itemTotalBeforeDiscount - itemTotal).toFixed(2)} ${currency}\n`;
+                } else {
+                    message += `   💵 *السعر*: ${itemTotal.toFixed(2)} ${currency}\n`;
+                }
+
+                // إضافة تفاصيل إضافية إن وجدت
+                if (item.code || item.description) {
+                    message += `   📌 *تفاصيل*: ${item.code || item.description}\n`;
+                }
+
+                message += "━━━━━━━━━━━━━━━━━━━━━━━━━━━\n";
+            });
+
+            // ملخص الطلب
+            message += `💳 *ملخص الطلب*:\n`;
+            message += `   ➤ *الإجمالي قبل الخصم*: ${totalBeforeDiscount.toFixed(2)} ${currency}\n`;
+            message += `   ➤ *الإجمالي بعد الخصم*: ${total.toFixed(2)} ${currency}\n`;
+
+            if (totalBeforeDiscount > total) {
+                message += `   🎉 *إجمالي التوفير*: ${(totalBeforeDiscount - total).toFixed(2)} ${currency}\n`;
+            }
+
+            // كود الخصم إن وجد
+            const discountCode = cart.discountCode || '';
+            if (discountCode) {
+                message += `   🎟️ *كود الخصم*: ${discountCode}\n`;
+            }
+
+            // عنوان ووقت التوصيل
+            message += "\n📍 *عنوان التوصيل*:\n";
+            message += `${deliveryAddress}\n`;
+
+            if (deliveryTime.trim()) {
+                message += `⏰ *وقت التوصيل المفضل*: ${deliveryTime}\n`;
+            }
+
+            if (customerNote.trim()) {
+                message += `📝 *ملاحظات العميل*: ${customerNote}\n`;
+            }
+
+            // رسالة ختامية
+            message += "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━\n";
+            message += "🌟 *شكرًا لاختياركم متجرنا المميز!*\n";
+            message += "🚚 نتطلع لتوصيل طلبكم بأسرع وقت!\n";
+            message += "📲 تواصلوا معنا لأي استفسار: +201126630356\n";
+            message += "💖 *متجركم المفضل دائمًا!*";
+
+            // تشفير الرسالة لضمان التوافق
+            const encodedMessage = encodeURIComponent(message).replace(/%20/g, '+');
+            const whatsappUrl = `https://wa.me/+201126630356?text=${encodedMessage}`;
+
+            // فتح WhatsApp مع التحقق من التوافق
+            try {
+                window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+            } catch (error) {
+                throw new Error('فشل فتح رابط واتساب');
+            }
+
+            // حفظ الطلب محليًا
+            saveOrderLocally({
+                cart,
+                total,
+                totalBeforeDiscount,
+                date: new Date(),
+                deliveryAddress,
+                deliveryTime,
+                customerNote,
+                customerName,
+                discountCode
+            });
+
+            // إنهاء العملية
+            hideLoading();
+            closeCart();
+            showNotification('🚀 تم توجيهك إلى واتساب لإتمام طلبك بنجاح! شكرًا لثقتك 🌟', 'success');
+            return true;
+
+        } catch (error) {
+            console.error('خطأ أثناء معالجة الطلب:', error);
+            showNotification('⚠️ حدث خطأ أثناء معالجة الطلب. حاول مرة أخرى!', 'error');
+            hideLoading();
+            return false;
         }
-        
-        message += `\n`;
-        message += `العنوان: أمام سنترال الصوة - المجمع\n`;
-        message += `شكراً لكم`;
-        
-        const whatsappUrl = `https://wa.me/+201126630356?text=${encodeURIComponent(message)}`;
-        window.open(whatsappUrl, '_blank');
-        
-        hideLoading();
-        closeCart();
-        showNotification('تم توجيهك إلى واتساب لإتمام الطلب', 'success');
     }, 1000);
+}
+
+// وظيفة لحفظ الطلب محليًا
+function saveOrderLocally(order) {
+    try {
+        const orders = JSON.parse(localStorage.getItem('orders') || '[]');
+        orders.push(order);
+        localStorage.setItem('orders', JSON.stringify(orders));
+    } catch (error) {
+        console.error('خطأ أثناء حفظ الطلب محليًا:', error);
+    }
+}
+
+// وظيفة للتحقق من توافق النظام
+function isMobileDevice() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+
+// وظيفة لعرض نموذج تأكيد الطلب
+function showCheckoutConfirmation(options, callback) {
+    const confirmation = confirm('هل تريد تأكيد الطلب وإرساله عبر واتساب؟');
+    if (confirmation) {
+        callback(options);
+    } else {
+        showNotification('تم إلغاء إتمام الطلب.', 'info');
+    }
+}
+
+// دوال مساعدة (افتراضية إذا لم تكن معرفة)
+function showLoading() {
+    try {
+        const loadingElement = document.getElementById('loading') || document.createElement('div');
+        loadingElement.id = 'loading';
+        loadingElement.style.display = 'block';
+        document.body.appendChild(loadingElement);
+    } catch (error) {
+        console.warn('showLoading غير معرفة بشكل كامل:', error);
+    }
+}
+
+function hideLoading() {
+    try {
+        const loadingElement = document.getElementById('loading');
+        if (loadingElement) loadingElement.style.display = 'none';
+    } catch (error) {
+        console.warn('hideLoading غير معرفة بشكل كامل:', error);
+    }
+}
+
+function closeCart() {
+    try {
+        const cartElement = document.getElementById('cart');
+        if (cartElement) cartElement.style.display = 'none';
+    } catch (error) {
+        console.warn('closeCart غير معرفة بشكل كامل:', error);
+    }
+}
+
+function showNotification(message, type) {
+    try {
+        console.log(`[إشعار - ${type}]: ${message}`);
+        alert(message); // يمكن استبدالها بواجهة إشعار مخصصة
+    } catch (error) {
+        console.warn('showNotification غير معرفة بشكل كامل:', error);
+    }
+}
+
+// مثال على استخدام الكود
+function exampleUsage() {
+    // هيكلية العربة (افتراضية للاختبار)
+    window.cart = [
+        { name: 'منتج رائع', price: 90, originalPrice: 100, quantity: 2, discount: 10, code: '#12345' },
+        { name: 'منتج آخر', price: 150, originalPrice: 150, quantity: 1, discount: 0 }
+    ];
+    cart.discountCode = 'SUMMER25';
+
+    const orderOptions = {
+        deliveryAddress: 'أمام سنترال الصوة - المجمع',
+        deliveryTime: 'غدًا الساعة ٣:٠٠ م',
+        customerNote: 'يرجى التوصيل بسرعة',
+        customerName: 'أحمد محمد'
+    };
+
+    showCheckoutConfirmation(orderOptions, checkout);
+}
+
+// تشغيل المثال (للاختبار)
+exampleUsage();
 }
 
         // 6. تهيئة الصفحة عند التحميل
