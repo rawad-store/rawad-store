@@ -3163,7 +3163,10 @@ function clearWishlist() {
 
         // بديل باستخدام رموز ASCII للزخرفة
 function checkoutWithAscii() {
-    if (cart.length === 0) return;
+    if (cart.length === 0) {
+        showNotification('سلة التسوق فارغة. أضف منتجات أولاً', 'warning');
+        return;
+    }
     
     showLoading();
     
@@ -3177,86 +3180,149 @@ function checkoutWithAscii() {
         minute: '2-digit'
     });
     
+    // استخدام setTimeout لتجنب تجميد المتصفح
     setTimeout(() => {
-        const customerName = prompt("فضلاً أدخل اسمك للتوصيل:", "العميل الكريم");
-        const customerAddress = prompt("فضلاً أدخل عنوانك للتوصيل:", "أمام سنترال الصوة - المجمع");
-        const customerPhone = prompt("فضلاً أدخل رقم هاتفك:", "+20 1126630356");
-        
-        let message = "";
-        
-        // تصميم برأسية ASCII
-        message += "╔══════════════════════════════════════════╗\n";
-        message += "║          طلب جديد من مكتبة الرواد         ║\n";
-        message += "╚══════════════════════════════════════════╝\n\n";
-        
-        message += "╓──────────────────────────────────────────╖\n";
-        message += "║               معلومات الطلب              ║\n";
-        message += "╙──────────────────────────────────────────╜\n";
-        message += "│ التاريخ: " + dateTime + "\n";
-        message += "│ العميل: " + (customerName || "العميل الكريم") + "\n";
-        message += "│ العنوان: " + (customerAddress || "أمام سنترال الصوة - المجمع") + "\n";
-        message += "│ الهاتف: " + (customerPhone || "+20 1126630356") + "\n\n";
-        
-        message += "╓──────────────────────────────────────────╖\n";
-        message += "║             المنتجات المطلوبة            ║\n";
-        message += "╙──────────────────────────────────────────╜\n";
-        
-        let total = 0;
-        let totalBeforeDiscount = 0;
-        let totalSavings = 0;
-        
-        cart.forEach((item, index) => {
-            const itemTotal = item.price * item.quantity;
-            const itemTotalBeforeDiscount = item.originalPrice * item.quantity;
-            const itemSavings = itemTotalBeforeDiscount - itemTotal;
-            
-            total += itemTotal;
-            totalBeforeDiscount += itemTotalBeforeDiscount;
-            totalSavings += itemSavings;
-            
-            message += "├─ " + item.name + "\n";
-            message += "│  ├─ الكمية: " + item.quantity + "\n";
-            message += "│  ├─ السعر: " + item.price.toFixed(2) + " ج.م\n";
-            
-            if (item.discount > 0) {
-                message += "│  ├─ الخصم: " + item.discount + "%\n";
-                message += "│  └─ التوفير: " + itemSavings.toFixed(2) + " ج.م\n";
-            } else {
-                message += "│  └─ الإجمالي: " + itemTotal.toFixed(2) + " ج.م\n";
+        try {
+            const customerName = prompt("فضلاً أدخل اسمك للتوصيل:", "العميل الكريم");
+            if (customerName === null) {
+                hideLoading();
+                showNotification('تم إلغاء الطلب', 'info');
+                return;
             }
             
+            const customerAddress = prompt("فضلاً أدخل عنوانك للتوصيل:", "أمام سنترال الصوة - المجمع");
+            if (customerAddress === null) {
+                hideLoading();
+                showNotification('تم إلغاء الطلب', 'info');
+                return;
+            }
+            
+            const customerPhone = prompt("فضلاً أدخل رقم هاتفك:", "+20 1126630356");
+            if (customerPhone === null) {
+                hideLoading();
+                showNotification('تم إلغاء الطلب', 'info');
+                return;
+            }
+            
+            let message = "";
+            
+            // تصميم برأسية ASCII
+            message += "╔══════════════════════════════════════════╗\n";
+            message += "║          طلب جديد من مكتبة الرواد         ║\n";
+            message += "╚══════════════════════════════════════════╝\n\n";
+            
+            message += "╓──────────────────────────────────────────╖\n";
+            message += "║               معلومات الطلب              ║\n";
+            message += "╙──────────────────────────────────────────╜\n";
+            message += "│ التاريخ: " + dateTime + "\n";
+            message += "│ العميل: " + (customerName || "العميل الكريم") + "\n";
+            message += "│ العنوان: " + (customerAddress || "أمام سنترال الصوة - المجمع") + "\n";
+            message += "│ الهاتف: " + (customerPhone || "+20 1126630356") + "\n\n";
+            
+            message += "╓──────────────────────────────────────────╖\n";
+            message += "║             المنتجات المطلوبة            ║\n";
+            message += "╙──────────────────────────────────────────╜\n";
+            
+            let total = 0;
+            let totalBeforeDiscount = 0;
+            let totalSavings = 0;
+            
+            cart.forEach((item, index) => {
+                const itemTotal = item.price * item.quantity;
+                const itemTotalBeforeDiscount = item.originalPrice * item.quantity;
+                const itemSavings = itemTotalBeforeDiscount - itemTotal;
+                
+                total += itemTotal;
+                totalBeforeDiscount += itemTotalBeforeDiscount;
+                totalSavings += itemSavings;
+                
+                message += "├─ " + item.name + "\n";
+                message += "│  ├─ الكمية: " + item.quantity + "\n";
+                message += "│  ├─ السعر: " + item.price.toFixed(2) + " ج.م\n";
+                
+                if (item.discount > 0) {
+                    message += "│  ├─ الخصم: " + item.discount + "%\n";
+                    message += "│  └─ التوفير: " + itemSavings.toFixed(2) + " ج.م\n";
+                } else {
+                    message += "│  └─ الإجمالي: " + itemTotal.toFixed(2) + " ج.م\n";
+                }
+                
+                message += "│\n";
+            });
+            
+            message += "╓──────────────────────────────────────────╖\n";
+            message += "║                ملخص الطلب                ║\n";
+            message += "╙──────────────────────────────────────────╜\n";
+            message += "│ الإجمالي قبل الخصم: " + totalBeforeDiscount.toFixed(2) + " ج.م\n";
+            
+            if (totalSavings > 0) {
+                message += "│ التوفير الإجمالي: " + totalSavings.toFixed(2) + " ج.م\n";
+            }
+            
+            message += "│ المبلغ النهائي: " + total.toFixed(2) + " ج.م\n";
             message += "│\n";
-        });
-        
-        message += "╓──────────────────────────────────────────╖\n";
-        message += "║                ملخص الطلب                ║\n";
-        message += "╙──────────────────────────────────────────╜\n";
-        message += "│ الإجمالي قبل الخصم: " + totalBeforeDiscount.toFixed(2) + " ج.م\n";
-        
-        if (totalSavings > 0) {
-            message += "│ التوفير الإجمالي: " + totalSavings.toFixed(2) + " ج.م\n";
+            message += "╓──────────────────────────────────────────╖\n";
+            message += "║                شكراً لكم                 ║\n";
+            message += "╙──────────────────────────────────────────╜\n";
+            message += "│ نشكرك على اختيارك لمتجر مكتبة الرواد\n";
+            message += "│ سيتم تجهيز طلبك بأسرع وقت ممكن\n";
+            message += "│\n";
+            message += "│ للاستفسار: +20 1126630356\n";
+            message += "│ العنوان: أمام سنترال الصوة - المجمع\n";
+            message += "╘══════════════════════════════════════════╛\n";
+            message += "         مكتبة الرواد - رفيقك في رحلة العلم";
+            
+            const whatsappUrl = `https://wa.me/+201126630356?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+            
+            hideLoading();
+            closeCart();
+            showNotification('تم إعداد الطلب بنجاح! جاري التوجيه إلى واتساب', 'success');
+            
+        } catch (error) {
+            console.error('Error in checkout process:', error);
+            hideLoading();
+            showNotification('حدث خطأ أثناء إعداد الطلب', 'error');
         }
-        
-        message += "│ المبلغ النهائي: " + total.toFixed(2) + " ج.م\n";
-        message += "│\n";
-        message += "╓──────────────────────────────────────────╖\n";
-        message += "║                شكراً لكم                 ║\n";
-        message += "╙──────────────────────────────────────────╜\n";
-        message += "│ نشكرك على اختيارك لمتجر مكتبة الرواد\n";
-        message += "│ سيتم تجهيز طلبك بأسرع وقت ممكن\n";
-        message += "│\n";
-        message += "│ للاستفسار: +20 1126630356\n";
-        message += "│ العنوان: أمام سنترال الصوة - المجمع\n";
-        message += "╘══════════════════════════════════════════╛\n";
-        message += "         مكتبة الرواد - رفيقك في رحلة العلم";
-        
-        const whatsappUrl = `https://wa.me/+201126630356?text=${encodeURIComponent(message)}`;
-        window.open(whatsappUrl, '_blank');
-        
-        hideLoading();
-        closeCart();
-        showNotification('تم إعداد الطلب بنجاح! جاري التوجيه إلى واتساب', 'success');
-    }, 1000);
+    }, 500);
+}
+
+// دالة لعرض التنبيهات
+function showNotification(message, type = 'info') {
+    // تأكد من وجود دالة showNotification أو أنشئها
+    if (typeof window.showNotification !== 'function') {
+        // إنشاء تنبيه بسيط إذا لم تكن الدالة موجودة
+        alert(message);
+        return;
+    }
+    
+    // إذا كانت الدالة موجودة، استخدمها
+    window.showNotification(message, type);
+}
+
+// دالة لإظهار تحميل
+function showLoading() {
+    const loadingOverlay = document.getElementById('loadingOverlay');
+    if (loadingOverlay) {
+        loadingOverlay.style.display = 'flex';
+    }
+}
+
+// دالة لإخفاء تحميل
+function hideLoading() {
+    const loadingOverlay = document.getElementById('loadingOverlay');
+    if (loadingOverlay) {
+        loadingOverlay.style.display = 'none';
+    }
+}
+
+// دالة لإغلاق السلة
+function closeCart() {
+    const cartModal = document.getElementById('cartModal');
+    if (cartModal) {
+        cartModal.classList.remove('active');
+    }
+    document.body.style.overflow = 'auto';
 }
         // 6. تهيئة الصفحة عند التحميل
         document.addEventListener('DOMContentLoaded', function() {
