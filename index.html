@@ -3162,56 +3162,78 @@
             }
         }
 
-        // 5. إتمام الطلب
-        function checkout() {
-            if (cart.length === 0) return;
+        // 5. إتمام الطلب بشكل جذاب ومبهر
+function checkout() {
+    if (cart.length === 0) return;
+    
+    showLoading();
+    
+    setTimeout(() => {
+        let message = "✨ *مرحباً، أريد طلب المنتجات التالية:* ✨\n\n";
+        let total = 0;
+        let totalBeforeDiscount = 0;
+        let totalSavings = 0;
+        
+        // رأس الجدول
+        message += "╔══════════════════════════════════════╗\n";
+        message += "║              📦 طلبياتي              ║\n";
+        message += "╠══════════════════════════════════════╣\n";
+        
+        cart.forEach((item, index) => {
+            const itemTotal = item.price * item.quantity;
+            const itemTotalBeforeDiscount = item.originalPrice * item.quantity;
+            const itemSavings = itemTotalBeforeDiscount - itemTotal;
             
-            showLoading();
+            total += itemTotal;
+            totalBeforeDiscount += itemTotalBeforeDiscount;
+            totalSavings += itemSavings;
             
-            setTimeout(() => {
-                let message = "مرحباً، أريد طلب المنتجات التالية:\n\n";
-                let total = 0;
-                let totalBeforeDiscount = 0;
-                
-                cart.forEach(item => {
-                    const itemTotal = item.price * item.quantity;
-                    const itemTotalBeforeDiscount = item.originalPrice * item.quantity;
-                    total += itemTotal;
-                    totalBeforeDiscount += itemTotalBeforeDiscount;
-                    
-                    message += `• ${item.name}\n`;
-                    message += `  الكمية: ${item.quantity}\n`;
-                    
-                    if (item.discount > 0) {
-                        message += `  السعر الأصلي: ${itemTotalBeforeDiscount} جنيه\n`;
-                        message += `  السعر بعد الخصم: ${itemTotal} جنيه\n`;
-                        message += `  (توفير: ${itemTotalBeforeDiscount - itemTotal} جنيه)\n`;
-                    } else {
-                        message += `  السعر: ${itemTotal} جنيه\n`;
-                    }
-                    
-                    message += `\n`;
-                });
-                
-                message += `الإجمالي قبل الخصم: ${totalBeforeDiscount} جنيه\n`;
-                message += `الإجمالي بعد الخصم: ${total} جنيه\n`;
-                
-                if (totalBeforeDiscount > total) {
-                    message += `وفرت: ${totalBeforeDiscount - total} جنيه\n`;
-                }
-                
-                message += `\n`;
-                message += `العنوان: أمام سنترال الصوة - المجمع\n`;
-                message += `شكراً لكم`;
-                
-                const whatsappUrl = `https://wa.me/+201126630356?text=${encodeURIComponent(message)}`;
-                window.open(whatsappUrl, '_blank');
-                
-                hideLoading();
-                closeCart();
-                showNotification('تم توجيهك إلى واتساب لإتمام الطلب', 'success');
-            }, 1000);
+            message += `║ 🎯 *${item.name}*\n`;
+            message += `║    📊 الكمية: ${item.quantity}\n`;
+            
+            if (item.discount > 0) {
+                message += `║    💰 السعر الأصلي: ${itemTotalBeforeDiscount.toFixed(2)} جنيه\n`;
+                message += `║    ✅ السعر بعد الخصم: ${itemTotal.toFixed(2)} جنيه\n`;
+                message += `║    🎁 توفير: ${itemSavings.toFixed(2)} جنيه\n`;
+            } else {
+                message += `║    💵 السعر: ${itemTotal.toFixed(2)} جنيه\n`;
+            }
+            
+            // خط فاصل بين المنتجات
+            if (index < cart.length - 1) {
+                message += "╟──────────────────────────────────────╢\n";
+            }
+        });
+        
+        // تذييل الجدول
+        message += "╠══════════════════════════════════════╣\n";
+        message += `║ 📈 الإجمالي قبل الخصم: ${totalBeforeDiscount.toFixed(2)} جنيه\n`;
+        message += `║ 🎯 الإجمالي بعد الخصم: ${total.toFixed(2)} جنيه\n`;
+        
+        if (totalSavings > 0) {
+            message += `║ 💎 وفرت: ${totalSavings.toFixed(2)} جنيه\n`;
         }
+        
+        message += "╚══════════════════════════════════════╝\n\n";
+        
+        // معلومات التوصيل
+        message += "📍 *معلومات التوصيل:*\n";
+        message += "🏠 العنوان: أمام سنترال الصوة - المجمع\n";
+        message += "📞 الهاتف: +20 1126630356\n\n";
+        
+        // تذييل الرسالة
+        message += "────────────────────────\n";
+        message += "شكراً لكم على ثقتكم 🌟\n";
+        message += "مكتبة الرواد - الصوة 📚";
+        
+        const whatsappUrl = `https://wa.me/+201126630356?text=${encodeURIComponent(message)}`;
+        window.open(whatsappUrl, '_blank');
+        
+        hideLoading();
+        closeCart();
+        showNotification('تم توجيهك إلى واتساب لإتمام الطلب', 'success');
+    }, 1000);
+}
 
         // 6. تهيئة الصفحة عند التحميل
         document.addEventListener('DOMContentLoaded', function() {
