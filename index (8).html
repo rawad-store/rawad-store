@@ -3161,56 +3161,71 @@ function clearWishlist() {
     }
 }
 
-        // 5. إتمام الطلب
+         // 5. إتمام الطلب - النسخة المحسنة
         function checkout() {
-        if (cart.length === 0) return;
-    
-        showLoading();
-    
-        setTimeout(() => {
-        let message = "مرحباً، أريد طلب المنتجات التالية:\n\n";
-        let total = 0;
-        let totalBeforeDiscount = 0;
-        
-        cart.forEach(item => {
-            const itemTotal = item.price * item.quantity;
-            const itemTotalBeforeDiscount = item.originalPrice * item.quantity;
-            total += itemTotal;
-            totalBeforeDiscount += itemTotalBeforeDiscount;
+            if (cart.length === 0) return;
             
-            message += `• ${item.name}\n`;
-            message += `  الكمية: ${item.quantity}\n`;
+            showLoading();
             
-            if (item.discount > 0) {
-                message += `  السعر الأصلي: ${itemTotalBeforeDiscount} جنيه\n`;
-                message += `  السعر بعد الخصم: ${itemTotal} جنيه\n`;
-                message += `  (توفير: ${itemTotalBeforeDiscount - itemTotal} جنيه)\n`;
-            } else {
-                message += `  السعر: ${itemTotal} جنيه\n`;
-            }
-            
-            message += `\n`;
-        });
-        
-        message += `الإجمالي قبل الخصم: ${totalBeforeDiscount} جنيه\n`;
-        message += `الإجمالي بعد الخصم: ${total} جنيه\n`;
-        
-        if (totalBeforeDiscount > total) {
-            message += `وفرت: ${totalBeforeDiscount - total} جنيه\n`;
+            setTimeout(() => {
+                const now = new Date();
+                const date = now.toLocaleDateString('ar-EG');
+                const time = now.toLocaleTimeString('ar-EG');
+                
+                let message = `✨ *طلب جديد* ✨\n\n`;
+                message += `📍 *معلومات العميل:*\n`;
+                message += `👤 الاسم: ${customer.name}\n`;
+                message += `🕐 التاريخ: ${date}\n`;
+                message += `⏰ الوقت: ${time}\n\n`;
+                message += `📦 *تفاصيل الطلب:*\n`;
+                message += `====================\n\n`;
+                
+                let total = 0;
+                let totalBeforeDiscount = 0;
+                
+                cart.forEach(item => {
+                    const itemTotal = item.price * item.quantity;
+                    const itemTotalBeforeDiscount = item.originalPrice * item.quantity;
+                    total += itemTotal;
+                    totalBeforeDiscount += itemTotalBeforeDiscount;
+                    
+                    message += `🏷️ *${item.name}*\n`;
+                    message += `   الكمية: ${item.quantity}\n`;
+                    
+                    if (item.discount > 0) {
+                        message += `   السعر الأصلي: ~~${itemTotalBeforeDiscount}~~ جنيه\n`;
+                        message += `   السعر بعد الخصم: ${itemTotal} جنيه\n`;
+                        message += `   💰 توفير: ${itemTotalBeforeDiscount - itemTotal} جنيه\n`;
+                    } else {
+                        message += `   السعر: ${itemTotal} جنيه\n`;
+                    }
+                    
+                    message += `\n`;
+                });
+                
+                message += `====================\n`;
+                message += `💰 *الإجمالي قبل الخصم:* ${totalBeforeDiscount} جنيه\n`;
+                message += `💵 *الإجمالي بعد الخصم:* ${total} جنيه\n`;
+                
+                if (totalBeforeDiscount > total) {
+                    message += `🎉 *وفرت:* ${totalBeforeDiscount - total} جنيه\n`;
+                }
+                
+                message += `\n`;
+                message += `🏠 *عنوان التسليم:*\n`;
+                message += `${customer.address}\n\n`;
+                message += `📞 *للتواصل:*\n`;
+                message += `يرجى التواصل في حال وجود أي استفسارات أو تعديلات على الطلب\n\n`;
+                message += `🌹 *شكراً لثقتكم بنا* 🌹\n`;
+                message += `نتمنى لكم يوماً سعيداً وتجربة تسوق ممتعة\n`;
+                
+                const whatsappUrl = `https://wa.me/+201126630356?text=${encodeURIComponent(message)}`;
+                window.open(whatsappUrl, '_blank');
+                
+                hideLoading();
+                showNotification('تم توجيهك إلى واتساب لإتمام الطلب', 'success');
+            }, 1000);
         }
-        
-        message += `\n`;
-        message += `العنوان: أمام سنترال الصوة - المجمع\n`;
-        message += `شكراً لكم`;
-        
-        const whatsappUrl = `https://wa.me/+201126630356?text=${encodeURIComponent(message)}`;
-        window.open(whatsappUrl, '_blank');
-        
-        hideLoading();
-        closeCart();
-        showNotification('تم توجيهك إلى واتساب لإتمام الطلب', 'success');
-    }, 1000);
-}
 
         // 6. تهيئة الصفحة عند التحميل
         document.addEventListener('DOMContentLoaded', function() {
