@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-eval' https://www.gstatic.com/;">
     <title>دليل - Daleel | دليل الخدمات الحكومية والعامة</title>
     <meta name="description" content="دليل شامل للخدمات الحكومية والعامة مع تقييمات المستخدمين والمعلومات المفصلة"/>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -790,7 +791,7 @@
         <!-- Search Section -->
         <section class="search-container" aria-label="بحث عن الخدمات">
             <div class="search-bar">
-                <input type="text" id="searchInput" placeholder="ابحث عن خدمة (يمكنك البحث بأي جزء من الكلمة أو عدة كلمات)..." aria-label="حقل البحث" />
+                <input type="text" id="searchInput" name="searchInput" placeholder="ابحث عن خدمة (يمكنك البحث بأي جزء من الكلمة أو عدة كلمات)..." aria-label="حقل البحث" />
                 <button onclick="searchServices()" aria-label="بحث"><i class="fas fa-search"></i></button>
             </div>
             <div id="searchSuggestions" class="search-suggestions" role="listbox" aria-label="اقتراحات البحث"></div>
@@ -858,15 +859,15 @@
                 <button class="btn btn-outline" onclick="toggleAdd()">إغلاق</button>
             </div>
             <form id="serviceForm" class="box-body">
-                <input type="hidden" id="editServiceId" value="">
+                <input type="hidden" id="editServiceId" name="editServiceId" value="">
                 <div class="row">
                     <label for="svcName">اسم الخدمة</label>
-                    <input id="svcName" placeholder="مثال: استخراج جواز سفر" required aria-required="true" />
+                    <input id="svcName" name="svcName" placeholder="مثال: استخراج جواز سفر" required aria-required="true" />
                 </div>
                 <div class="row row-2">
                     <div>
                         <label for="svcCat">القسم</label>
-                        <select id="svcCat" required aria-required="true">
+                        <select id="svcCat" name="svcCat" required aria-required="true">
                             <option value="">اختر القسم</option>
                             <option>حكومي</option>
                             <option>صحة</option>
@@ -877,26 +878,26 @@
                     </div>
                     <div>
                         <label for="svcLoc">المكان</label>
-                        <input id="svcLoc" placeholder="الشرقية - أبوحماد" required aria-required="true" />
+                        <input id="svcLoc" name="svcLoc" placeholder="الشرقية - أبوحماد" required aria-required="true" />
                     </div>
                 </div>
                 <div class="row">
                     <label for="svcDocs">الأوراق المطلوبة</label>
-                    <textarea id="svcDocs" placeholder="اذكر الأوراق المطلوبة..." required aria-required="true"></textarea>
+                    <textarea id="svcDocs" name="svcDocs" placeholder="اذكر الأوراق المطلوبة..." required aria-required="true"></textarea>
                 </div>
                 <div class="row row-2">
                     <div>
                         <label for="svcCost">التكلفة (اختياري)</label>
-                        <input id="svcCost" placeholder="مثال: 100 جنيه"/>
+                        <input id="svcCost" name="svcCost" placeholder="مثال: 100 جنيه"/>
                     </div>
                     <div>
                         <label for="svcDur">المدة المتوقعة (اختياري)</label>
-                        <input id="svcDur" placeholder="مثال: 3-5 أيام"/>
+                        <input id="svcDur" name="svcDur" placeholder="مثال: 3-5 أيام"/>
                     </div>
                 </div>
                 <div class="row">
                     <label for="svcNotes">ملاحظات (اختياري)</label>
-                    <textarea id="svcNotes" placeholder="أي معلومات إضافية مفيدة..."></textarea>
+                    <textarea id="svcNotes" name="svcNotes" placeholder="أي معلومات إضافية مفيدة..."></textarea>
                 </div>
                 <div class="f-end">
                     <button type="button" class="btn" onclick="toggleAdd()" aria-label="إلغاء">إلغاء</button>
@@ -916,7 +917,7 @@
             <div class="box-body">
                 <form id="reviewForm">
                     <div class="row">
-                        <label>التقييم</label>
+                        <label for="ratingStars">التقييم</label>
                         <div class="rating" id="ratingStars" role="radiogroup" aria-label="اختيار التقييم">
                             <i class="far fa-star" data-rating="1" role="radio" aria-checked="false" tabindex="0"></i>
                             <i class="far fa-star" data-rating="2" role="radio" aria-checked="false" tabindex="-1"></i>
@@ -924,15 +925,15 @@
                             <i class="far fa-star" data-rating="4" role="radio" aria-checked="false" tabindex="-1"></i>
                             <i class="far fa-star" data-rating="5" role="radio" aria-checked="false" tabindex="-1"></i>
                         </div>
-                        <input type="hidden" id="reviewRating" value="0" required aria-required="true" />
+                        <input type="hidden" id="reviewRating" name="reviewRating" value="0" required aria-required="true" />
                     </div>
                     <div class="row">
                         <label for="reviewComment">التعليق (اختياري)</label>
-                        <textarea id="reviewComment" placeholder="اكتب تعليقك عن الخدمة..."></textarea>
+                        <textarea id="reviewComment" name="reviewComment" placeholder="اكتب تعليقك عن الخدمة..."></textarea>
                     </div>
                     <div class="row">
                         <label for="reviewAccuracy">هل المعلومات صحيحة?</label>
-                        <select id="reviewAccuracy" required aria-required="true">
+                        <select id="reviewAccuracy" name="reviewAccuracy" required aria-required="true">
                             <option value="">اختر الإجابة</option>
                             <option value="نعم">نعم، المعلومات صحيحة</option>
                             <option value="جزئياً">جزئياً، بعض المعلومات تحتاج تحديث</option>
@@ -965,11 +966,11 @@
                 <form id="loginForm" class="row" autocomplete="on">
                     <div class="row">
                         <label for="loginEmail">البريد الإلكتروني</label>
-                        <input id="loginEmail" type="email" placeholder="email@example.com" required aria-required="true" />
+                        <input id="loginEmail" name="loginEmail" type="email" placeholder="email@example.com" required aria-required="true" />
                     </div>
                     <div class="row">
                         <label for="loginPass">كلمة المرور</label>
-                        <input id="loginPass" type="password" placeholder="******" required aria-required="true" />
+                        <input id="loginPass" name="loginPass" type="password" placeholder="******" required aria-required="true" />
                     </div>
                     <div class="f-end">
                         <button type="submit" class="btn btn-primary btn-icon" aria-label="دخول">➡️ دخول</button>
@@ -980,16 +981,16 @@
                 <form id="registerForm" class="row" style="display:none" autocomplete="on">
                     <div class="row">
                         <label for="regEmail">البريد الإلكتروني</label>
-                        <input id="regEmail" type="email" placeholder="email@example.com" required aria-required="true" />
+                        <input id="regEmail" name="regEmail" type="email" placeholder="email@example.com" required aria-required="true" />
                     </div>
                     <div class="row row-2">
                         <div>
                             <label for="regPass">كلمة المرور</label>
-                            <input id="regPass" type="password" minlength="6" placeholder="6 أحرف على الأقل" required aria-required="true" />
+                            <input id="regPass" name="regPass" type="password" minlength="6" placeholder="6 أحرف على الأقل" required aria-required="true" />
                         </div>
                         <div>
                             <label for="regConfirm">تأكيد كلمة المرور</label>
-                            <input id="regConfirm" type="password" minlength="6" placeholder="أعد كتابة كلمة المرور" required aria-required="true" />
+                            <input id="regConfirm" name="regConfirm" type="password" minlength="6" placeholder="أعد كتابة كلمة المرور" required aria-required="true" />
                         </div>
                     </div>
                     <div class="f-end">
@@ -1413,7 +1414,7 @@
             const reviewForm = $('#reviewForm');
             reviewForm.innerHTML = `
                 <div class="row">
-                    <label>التقييم</label>
+                    <label for="ratingStars">التقييم</label>
                     <div class="rating" id="ratingStars" role="radiogroup" aria-label="اختيار التقييم">
                         <i class="far fa-star" data-rating="1" role="radio" aria-checked="false" tabindex="0"></i>
                         <i class="far fa-star" data-rating="2" role="radio" aria-checked="false" tabindex="-1"></i>
@@ -1421,15 +1422,15 @@
                         <i class="far fa-star" data-rating="4" role="radio" aria-checked="false" tabindex="-1"></i>
                         <i class="far fa-star" data-rating="5" role="radio" aria-checked="false" tabindex="-1"></i>
                     </div>
-                    <input type="hidden" id="reviewRating" value="0" required aria-required="true" />
+                    <input type="hidden" id="reviewRating" name="reviewRating" value="0" required aria-required="true" />
                 </div>
                 <div class="row">
                     <label for="reviewComment">التعليق (اختياري)</label>
-                    <textarea id="reviewComment" placeholder="اكتب تعليقك عن الخدمة..."></textarea>
+                    <textarea id="reviewComment" name="reviewComment" placeholder="اكتب تعليقك عن الخدمة..."></textarea>
                 </div>
                 <div class="row">
                     <label for="reviewAccuracy">هل المعلومات صحيحة؟</label>
-                    <select id="reviewAccuracy" required aria-required="true">
+                    <select id="reviewAccuracy" name="reviewAccuracy" required aria-required="true">
                         <option value="">اختر الإجابة</option>
                         <option value="نعم">نعم، المعلومات صحيحة</option>
                         <option value="جزئياً">جزئياً، بعض المعلومات تحتاج تحديث</option>
