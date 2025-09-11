@@ -6,8 +6,8 @@
   <title>عرض مكتبة الرواد - باستلام أحدث ماكينة لفوري</title>
   
     <!-- Meta Tags for Social Media Sharing -->
-    <meta property="og:title" content="مكتبة الرواد -الصوة | متجر الكتب والمستلزمات المدرسية">
-    <meta property="og:description" content="مكتبة الرواد توفر أكبر مجموعة من الكتب الدراسية والمستلزمات المكتبية. اطلب خدمات الطباعة والتصوير واستلمها بسهولة .">
+    <meta property="og:title" content="عرض مكتبة الرواد - باستلام أحدث ماكينة لفوري">
+    <meta property="og:description" content="مكتبة الرواد - الصوة | متجر الكتب والمستلزمات المدرسية">
     <meta property="og:image" content="https://raw.githubusercontent.com/rawad-store/rawad-store.github.io/main/preview.jpg">
     <meta property="og:url" content="https://rawad-store.github.io/">
     <meta property="og:type" content="website">
@@ -15,8 +15,8 @@
 
     <!-- Twitter Card Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="مكتبة الرواد - الصوة | متجر الكتب والمستلزمات المدرسية">
-    <meta name="twitter:description" content="أكبر مجموعة من الكتب الدراسية والمستلزمات المكتبية.">
+    <meta name="twitter:title" content="عرض مكتبة الرواد - باستلام أحدث ماكينة لفوري">
+    <meta name="twitter:description" content="مكتبة الرواد - الصوة | متجر الكتب والمستلزمات المدرسية">
     <meta name="twitter:image" content="https://raw.githubusercontent.com/rawad-store/rawad-store.github.io/main/preview.jpg">
     
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
@@ -52,6 +52,7 @@
       overflow: hidden;
       position: relative;
       transition: transform 0.5s ease;
+      margin: 0 auto;
     }
     .container:hover { transform: translateY(-10px); }
 
@@ -135,6 +136,7 @@
       color: white;
       width: 55px;
       height: 55px;
+      min-width: 55px;
       border-radius: 50%;
       display: flex;
       align-items: center;
@@ -241,10 +243,104 @@
     }
     #backToTop:hover { transform: scale(1.1); }
 
-    @media (max-width:480px) {
-      .title { font-size: 1.5rem; }
-      .countdown { font-size: 1.6rem; }
-      .cta-button { padding: 14px 20px; font-size: 1rem; }
+    /* تحسينات للشاشات الصغيرة */
+    @media (max-width: 768px) {
+      body {
+        padding: 15px;
+        display: block;
+      }
+      
+      .container {
+        max-width: 100%;
+        border-radius: 20px;
+      }
+      
+      .header {
+        padding: 25px 15px;
+      }
+      
+      .logo {
+        font-size: 3rem;
+      }
+      
+      .title {
+        font-size: 1.6rem;
+      }
+      
+      .subtitle {
+        font-size: 1rem;
+      }
+      
+      .content {
+        padding: 20px 15px;
+      }
+      
+      .offer-badge {
+        padding: 12px 20px;
+        font-size: 1.1rem;
+      }
+      
+      .feature {
+        padding: 15px;
+        flex-direction: column;
+        text-align: center;
+        border-right: none;
+        border-bottom: 5px solid #4ECDC4;
+      }
+      
+      .feature-icon {
+        margin-left: 0;
+        margin-bottom: 10px;
+        width: 50px;
+        height: 50px;
+        min-width: 50px;
+        font-size: 1.2rem;
+      }
+      
+      .timer {
+        padding: 15px;
+      }
+      
+      .countdown {
+        font-size: 1.7rem;
+      }
+      
+      .testimonials, .faq-section {
+        padding: 15px;
+        margin: 20px 0;
+      }
+      
+      .location-section {
+        padding: 20px 15px;
+      }
+      
+      .cta-button {
+        padding: 15px 25px;
+        font-size: 1.1rem;
+        width: 100%;
+        justify-content: center;
+      }
+      
+      #backToTop {
+        bottom: 15px;
+        left: 15px;
+        padding: 10px 15px;
+        font-size: 1.1rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .title { font-size: 1.4rem; }
+      .countdown { font-size: 1.5rem; }
+      .offer-badge { font-size: 1rem; }
+      .feature-text { font-size: 0.95rem; }
+    }
+    
+    /* تحسينات للشاشات الكبيرة */
+    @media (min-width: 1200px) {
+      .container {
+        max-width: 600px;
+      }
     }
   </style>
 </head>
@@ -276,7 +372,7 @@
       <div class="location-info"><i class="fas fa-building"></i> مكتبة الرواد - الصوة</div>
       <div class="location-info"><i class="fas fa-directions"></i> العنوان: أمام سنترال الصوة - بالمجمع</div>
       <div style="text-align: center; margin: 15px 0;">
-        <a href="https://maps.app.goo.gl/AYcYJXjYipwdSgRQA" target="_blank" class="map-link"><i class="fas fa-map"></i> عرض على الخريطة</a>
+        <a href="https://maps.app.goo.gl/AYcYJXjYipwdSgRQA" target="_blank" class="map-link" style="color: white; text-decoration: none;"><i class="fas fa-map"></i> عرض على الخريطة</a>
       </div>
       <div class="cta-section">
         <a href="https://wa.me/+201126630356" class="cta-button" target="_blank"><i class="fab fa-whatsapp"></i> تواصل معنا الآن</a>
