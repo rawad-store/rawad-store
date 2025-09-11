@@ -475,7 +475,7 @@
 
     <div class="content">
       <div class="timer">
-        <div class="timer-text">عرض لمدة محدودة</div>
+        <div class="timer-text"> عرض خاص لمدة </div>
         <div class="countdown" id="countdown">3 أيام فقط!</div>
       </div>
 
@@ -538,7 +538,7 @@
       else{if(hours>0){hours--;minutes=59;seconds=59;}
       else{if(days>0){days--;hours=23;minutes=59;seconds=59;}
       else{countdownElement.innerHTML='انتهى العرض!';return;}}}}
-      countdownElement.innerHTML=`${days} أيام ${hours} س ${minutes} د ${seconds} ث`;
+      countdownElement.innerHTML=`${days} أيام ${hours} س ${minutes} د `;
     }
     setInterval(updateCountdown,1000);updateCountdown();
 
