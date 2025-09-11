@@ -248,23 +248,25 @@
             background: rgba(255,255,255,0.3);
         }
         
-        .map-link {
-            display: inline-block;
-            margin-top: 10px;
-            padding: 10px 20px;
-            background: rgba(255, 255, 255, 0.2);
+        .map-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 15px;
+            padding: 12px 25px;
+            background: linear-gradient(45deg, #4285F4, #34A853);
             border-radius: 50px;
             color: white;
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 700;
             transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 5px 15px rgba(66, 133, 244, 0.4);
+            gap: 10px;
         }
         
-        .map-link:hover {
-            background: rgba(255, 255, 255, 0.3);
+        .map-button:hover {
             transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 8px 20px rgba(66, 133, 244, 0.6);
         }
         
         .cta-section {
@@ -476,6 +478,14 @@
             transition: transform 0.3s ease;
         }
         
+        .buttons-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
         @media (max-width: 480px) {
             .container {
                 margin: 10px;
@@ -497,8 +507,8 @@
                 padding: 20px;
             }
             
-            .cta-button {
-                display: block;
+            .cta-button, .map-button {
+                display: flex;
                 margin: 10px auto;
                 width: fit-content;
                 padding: 15px 25px;
@@ -511,6 +521,11 @@
             
             .countdown {
                 font-size: 1.8rem;
+            }
+            
+            .buttons-container {
+                flex-direction: column;
+                align-items: center;
             }
         }
     </style>
@@ -562,19 +577,7 @@
                     <div class="feature-text">توفير مضمون - لا مليم زيادة!</div>
                 </div>
             </div>
-            
-            <div class="testimonials">
-                <div class="testimonials-title">آراء عملائنا</div>
-                <div class="testimonial">
-                    <div class="testimonial-text">"ماكينة الفوري سهلت عليا دفع الفواتير وشحن الرصيد بدون أي تعب ، والخدمة بدون أي رسوم إضافية فترة العرض!"</div>
-                    <div class="testimonial-author">- أحمد س.</div>
-                </div>
-                <div class="testimonial">
-                    <div class="testimonial-text">"مكتبة الرواد دايماً بتقدم أفضل الخدمات، والماكينة الجديدة سريعة وآمنة وتوفر وقت كبير"</div>
-                    <div class="testimonial-author">- فاطمة ع.</div>
-                </div>
-            </div>
-            
+                        
             <div class="faq-section">
                 <div class="faq-title">أسئلة شائعة</div>
                 <div class="faq-item">
@@ -629,15 +632,12 @@
                 </div>
             </div>
             
-            <div style="text-align: center; margin: 15px 0;">
-                <a href="https://maps.app.goo.gl/AYcYJXjYipwdSgRQA" target="_blank" class="btn btn-outline-primary" style="margin-top: 0.5rem;">
-                                    <i class="fas fa-map" style="color: #ffffff" ></i> عرض على الخريطة
-            </div>
+            <div class="buttons-container">
+                <a href="https://maps.app.goo.gl/AYcYJXjYipwdSgRQA" target="_blank" class="map-button">
+                    <i class="fas fa-map-marked-alt"></i> عرض على الخريطة
                 </a>
-            </div>
-            
-            <div class="cta-section">
-                <a href="https://wa.me/+201126630356" class="cta-button" target="_blank">
+                
+                <a href="https://wa.me/01126630356" class="cta-button" target="_blank">
                     <i class="fab fa-whatsapp"></i>
                     تواصل معنا الآن
                 </a>
@@ -709,7 +709,7 @@
         
         // Add confetti effect on click
         document.addEventListener('click', function(e) {
-            if (e.target.classList.contains('cta-button')) {
+            if (e.target.classList.contains('cta-button') || e.target.classList.contains('map-button')) {
                 // Simple confetti effect
                 for (let i = 0; i < 30; i++) {
                     createConfetti(e.clientX, e.clientY);
