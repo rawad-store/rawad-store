@@ -253,26 +253,41 @@
             align-items: center;
             justify-content: center;
             margin-top: 15px;
-            padding: 12px 25px;
+            padding: 18px 35px;
             background: linear-gradient(45deg, #4285F4, #34A853);
+            border: none;
             border-radius: 50px;
             color: white;
             text-decoration: none;
-            font-weight: 700;
+            font-size: 1.2rem;
+            font-weight: 800;
             transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(66, 133, 244, 0.4);
-            gap: 10px;
+            box-shadow: 0 8px 20px rgba(66, 133, 244, 0.4);
+            gap: 12px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .map-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.2), transparent);
+            transform: translateX(100%);
+            transition: transform 0.6s;
+        }
+        
+        .map-button:hover::before {
+            transform: translateX(-100%);
         }
         
         .map-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(66, 133, 244, 0.6);
-        }
-        
-        .cta-section {
-            text-align: center;
-            margin-top: 25px;
-            position: relative;
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 12px 30px rgba(66, 133, 244, 0.6);
         }
         
         .cta-button {
@@ -533,7 +548,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <div class="logo">🚀✨</div>
+            <div class="logo"></div>
             <div class="title">مفاجــــأة الـــــرواد!</div>
             <div class="subtitle">أحدث ماكينة لفوري في مكتبة الرواد</div>
         </div>
@@ -577,70 +592,39 @@
                     <div class="feature-text">توفير مضمون - لا مليم زيادة!</div>
                 </div>
             </div>
-                        
-            <div class="faq-section">
-                <div class="faq-title">أسئلة شائعة</div>
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>هل توجد رسوم إضافية على الخدمات؟</span>
-                        <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
-                    </div>
-                    <div class="faq-answer">
-                        لا، جميع الخدمات مقدمة بدون أي رسوم إضافية. تدفع فقط القيمة المطلوبة للشحن أو الفاتورة.
-                    </div>
+                    
+            <div class="location-section">
+                <div class="location-title">
+                    <i class="fas fa-map-marker-alt"></i> موقعنا
                 </div>
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>ما هي ساعات العمل؟</span>
-                        <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
-                    </div>
-                    <div class="faq-answer">
-                        الخدمة متاحة طوال أيام الأسبوع بما في ذلك العطل الرسمية.
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>كيف يمكنني الوصول إليكم؟</span>
-                        <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
-                    </div>
-                    <div class="faq-answer">
-                        نحن موجودون في مكتبة الرواد - الصوة، أمام سنترال الصوة - بالمجمع. يمكنك استخدام رابط الخريطة للوصول إلينا بسهولة.
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="location-section">
-            <div class="location-title">
-                <i class="fas fa-map-marker-alt"></i> موقعنا
-            </div>
-            
-            <div class="location-info">
-                <div class="location-icon">
-                    <i class="fas fa-building"></i>
-                </div>
-                <div>مكتبة الرواد - الصوة</div>
-            </div>
-            
-            <div class="location-info">
-                <div class="location-icon">
-                    <i class="fas fa-directions"></i>
-                </div>
-                <div>
-                    <strong>العنوان:</strong><br>
-                    <span style="color: #a3d9ff;">أمام سنترال الصوة - بالمجمع</span>
-                </div>
-            </div>
-            
-            <div class="buttons-container">
-                <a href="https://maps.app.goo.gl/AYcYJXjYipwdSgRQA" target="_blank" class="map-button">
-                    <i class="fas fa-map-marked-alt"></i> عرض على الخريطة
-                </a>
                 
-                <a href="https://wa.me/01126630356" class="cta-button" target="_blank">
-                    <i class="fab fa-whatsapp"></i>
-                    تواصل معنا الآن
-                </a>
+                <div class="location-info">
+                    <div class="location-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <div>مكتبة الرواد - الصوة</div>
+                </div>
+                
+                <div class="location-info">
+                    <div class="location-icon">
+                        <i class="fas fa-directions"></i>
+                    </div>
+                    <div>
+                        <strong>العنوان:</strong>
+                        <span style="color: #a3d9ff;">أمام سنترال الصوة - بالمجمع</span>
+                    </div>
+                </div>
+                
+                <div class="buttons-container">
+                    <a href="https://maps.app.goo.gl/AYcYJXjYipwdSgRQA" target="_blank" class="map-button">
+                        <i class="fas fa-map-marked-alt"></i> عرض على الخريطة
+                    </a>
+                    
+                    <a href="https://wa.me/01126630356" class="cta-button" target="_blank">
+                        <i class="fab fa-whatsapp"></i>
+                        تواصل معنا الآن
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -707,14 +691,14 @@
             });
         });
         
-        // Add confetti effect on click
-        document.addEventListener('click', function(e) {
-            if (e.target.classList.contains('cta-button') || e.target.classList.contains('map-button')) {
+        // Add confetti effect on click for both buttons
+        document.querySelectorAll('.cta-button, .map-button').forEach(button => {
+            button.addEventListener('click', function(e) {
                 // Simple confetti effect
                 for (let i = 0; i < 30; i++) {
                     createConfetti(e.clientX, e.clientY);
                 }
-            }
+            });
         });
         
         function createConfetti(x, y) {
