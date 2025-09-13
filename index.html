@@ -5,20 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>عرض مكتبة الرواد - باستلام أحدث ماكينة لفوري</title>
   
-    <!-- Meta Tags for Social Media Sharing -->
-    <meta property="og:title" content="عرض مكتبة الرواد - باستلام أحدث ماكينة لفوري">
-    <meta property="og:description" content="مكتبة الرواد - الصوة | متجر الكتب والمستلزمات المدرسية">
-    <meta property="og:image" content="https://raw.githubusercontent.com/rawad-store/rawad-store.github.io/main/preview.jpg">
-    <meta property="og:url" content="https://rawad-store.github.io/">
-    <meta property="og:type" content="website">
-    <meta property="og:locale" content="ar_AR">
+  <!-- Favicon إضافي للتحسين -->
+  <link rel="icon" href="https://raw.githubusercontent.com/rawad-store/rawad-store.github.io/main/favicon.ico" type="image/x-icon">
+  
+  <!-- Meta Tags for Social Media Sharing -->
+  <meta property="og:title" content="عرض مكتبة الرواد - باستلام أحدث ماكينة لفوري">
+  <meta property="og:description" content="مكتبة الرواد - الصوة | متجر الكتب والمستلزمات المدرسية">
+  <meta property="og:image" content="https://raw.githubusercontent.com/rawad-store/rawad-store.github.io/main/preview.jpg">
+  <meta property="og:url" content="https://rawad-store.github.io/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ar_AR">
 
-    <!-- Twitter Card Tags -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="عرض مكتبة الرواد - باستلام أحدث ماكينة لفوري">
-    <meta name="twitter:description" content="مكتبة الرواد - الصوة | متجر الكتب والمستلزمات المدرسية">
-    <meta name="twitter:image" content="https://raw.githubusercontent.com/rawad-store/rawad-store.github.io/main/preview.jpg">
-    
+  <!-- Twitter Card Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="عرض مكتبة الرواد - باستلام أحدث ماكينة لفوري">
+  <meta name="twitter:description" content="مكتبة الرواد - الصوة | متجر الكتب والمستلزمات المدرسية">
+  <meta name="twitter:image" content="https://raw.githubusercontent.com/rawad-store/rawad-store.github.io/main/preview.jpg">
+  
+  <!-- تحسين SEO إضافي -->
+  <meta name="description" content="عرض خاص في مكتبة الرواد: دفع فواتير وشحن بدون رسوم إضافية بأحدث ماكينة فوري. موقعنا في الصوة، أبوحماد.">
+  <meta name="keywords" content="مكتبة الرواد, فوري, الصوة, أبوحماد, شحن رصيد, دفع فواتير">
+  
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap');
@@ -167,6 +174,7 @@
       transform: translateY(30px);
     }
     .feature.show { opacity: 1; transform: translateY(0); transition: all 0.8s ease; }
+    .feature:hover { background: linear-gradient(135deg, #e8f0fe 0%, #d6e6f2 100%); }
     .feature-icon {
       background: linear-gradient(45deg, #4ECDC4, #44A08D);
       color: white;
@@ -190,7 +198,7 @@
       text-align: center;
       margin-bottom: 25px;
     }
-    .countdown { font-size: 2rem; font-weight: 900; }
+    .countdown { font-size: 2rem; font-weight: 900; text-shadow: 1px 1px 2px rgba(0,0,0,0.3); }
 
     .testimonials, .faq-section {
       margin: 25px 0;
@@ -227,7 +235,9 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      transition: background 0.3s ease;
     }
+    .faq-question:hover { background: #d6e6f2; }
     .faq-answer {
       background: white;
       padding: 0 15px;
@@ -260,7 +270,7 @@
       cursor: pointer;
       transition: all 0.3s ease;
     }
-    .cta-button:hover { transform: scale(1.05); }
+    .cta-button:hover { transform: scale(1.05); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
 
     /* زر العودة للأعلى */
     #backToTop {
@@ -276,6 +286,7 @@
       display: none;
       z-index: 999;
       box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      transition: all 0.3s ease;
     }
     #backToTop:hover { transform: scale(1.1); }
 
@@ -330,6 +341,17 @@
     }
     .map-link i {
       margin-left: 8px;
+    }
+
+    /* إضافة تذييل للإخلاء -->
+    .footer-note {
+      text-align: center;
+      padding: 15px;
+      background: rgba(255,255,255,0.9);
+      margin-top: 20px;
+      font-size: 0.9rem;
+      color: #666;
+      border-radius: 10px;
     }
 
     /* تحسينات للشاشات الصغيرة */
@@ -481,9 +503,9 @@
 
       <div class="offer-badge"><i class="fas fa-fire"></i>سدد فواتيرك واشحن بدون أي رسوم إضافية.. وفر أكثر!</div>
 
-      <!-- صورة ماكينة فوري الحقيقية -->
+      <!-- صورة ماكينة فوري (استبدال برابط عام إذا لم يعمل الأصلي) -->
       <div class="fawry-machine" id="fawryMachine">
-        <img src="https://raw.githubusercontent.com/rawad-store/rawad-store/main/fawry.jpg" alt="أحدث ماكينة فوري" class="fawry-image">
+        <img src="https://raw.githubusercontent.com/rawad-store/rawad-store/main/fawry.jpg" alt="أحدث ماكينة دفع فوري Fawry في مكتبة الرواد - جهاز حديث للدفع الإلكتروني والشحن" class="fawry-image" onerror="this.src='https://via.placeholder.com/400x300/4ECDC4/FFFFFF?text=Fawry+Machine';">
         <div class="fawry-title">أحدث ماكينة دفع فوري</div>
         <div class="fawry-subtitle">متاحة الآن في مكتبة الرواد</div>
       </div>
@@ -495,6 +517,19 @@
         <div class="feature"><div class="feature-icon"><i class="fas fa-money-bill-wave"></i></div><div class="feature-text">توفير مضمون - لا مليم زيادة!</div></div>
       </div>
 
+      <!-- إضافة قسم FAQ بسيط للتحسين -->
+      <div class="faq-section" id="faqSection">
+        <h3 style="text-align: center; margin-bottom: 15px; color: #333;">أسئلة شائعة</h3>
+        <div class="faq-item">
+          <div class="faq-question"><span>كيف أستخدم الماكينة؟</span> <i class="fas fa-chevron-down"></i></div>
+          <div class="faq-answer">اختر الخدمة، أدخل البيانات، وادفع ببطاقتك أو النقد - سهل وسريع!</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question"><span>هل العرض ساري الآن؟</span> <i class="fas fa-chevron-down"></i></div>
+          <div class="faq-answer">نعم، لمدة 3 أيام فقط! تحقق من العداد أعلاه.</div>
+        </div>
+      </div>
+
       <div class="location-section">
         <div class="location-title"><i class="fas fa-map-marker-alt"></i> موقعنا</div>
         <div class="location-info"><i class="fas fa-building"></i> مكتبة الرواد - الصوة</div>
@@ -504,7 +539,7 @@
           أمام سنترال الصوة - بالمجمع<br> أبوحماد
         </span>
         
-        <a href="https://maps.app.goo.gl/AYcYJXjYipwdSgRQA" target="_blank" class="map-link">
+        <a href="https://maps.app.goo.gl/AYcYJXjYipwdSgRQA" target="_blank" rel="noopener noreferrer" class="map-link">
           <i class="fas fa-map"></i> عرض على الخريطة
         </a>
         
@@ -519,9 +554,14 @@
         </div>
         
         <div class="cta-section">
-          <a href="https://wa.me/+201126630356" class="cta-button" target="_blank"><i class="fab fa-whatsapp"></i> تواصل معنا الآن</a>
+          <a href="https://wa.me/+201126630356" class="cta-button" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i> تواصل معنا الآن</a>
         </div>
       </div>
+    </div>
+
+    <!-- إضافة تذييل للإخلاء -->
+    <div class="footer-note">
+      <p>تم التحديث في 13 سبتمبر 2025. للتحقق من تفاصيل العرض، تواصل معنا مباشرة. جميع الحقوق محفوظة لمكتبة الرواد.</p>
     </div>
   </div>
 
@@ -529,39 +569,56 @@
   <div id="backToTop"><i class="fas fa-arrow-up"></i></div>
 
   <script>
-    // Countdown timer
-    let days=3, hours=12, minutes=30, seconds=0;
-    const countdownElement=document.getElementById('countdown');
-    function updateCountdown(){
-      if(seconds>0){seconds--;}
-      else{if(minutes>0){minutes--;seconds=59;}
-      else{if(hours>0){hours--;minutes=59;seconds=59;}
-      else{if(days>0){days--;hours=23;minutes=59;seconds=59;}
-      else{countdownElement.innerHTML='انتهى العرض!';return;}}}}
-      countdownElement.innerHTML=`${days} أيام ${hours} س ${minutes} د `;
+    // تحسين العداد التنازلي ليبدأ من التاريخ الحالي (13 سبتمبر 2025 + 3 أيام)
+    const endDate = new Date('2025-09-16T23:59:59').getTime();
+    const countdownElement = document.getElementById('countdown');
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = endDate - now;
+      if (distance < 0) {
+        countdownElement.innerHTML = 'انتهى العرض!';
+        return;
+      }
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      countdownElement.innerHTML = `${days} أيام ${hours} س ${minutes} د`;
     }
-    setInterval(updateCountdown,1000);updateCountdown();
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
 
     // FAQ toggle
-    document.querySelectorAll('.faq-question').forEach(q=>{
-      q.addEventListener('click',()=>q.parentElement.classList.toggle('active'));
+    document.querySelectorAll('.faq-question').forEach(q => {
+      q.addEventListener('click', () => {
+        const item = q.parentElement;
+        item.classList.toggle('active');
+        const icon = q.querySelector('i');
+        icon.classList.toggle('fa-chevron-down');
+        icon.classList.toggle('fa-chevron-up');
+      });
     });
 
     // ظهور العناصر مع التمرير
-    const observer=new IntersectionObserver(entries=>{
-      entries.forEach(entry=>{
-        if(entry.isIntersecting){entry.target.classList.add('show');observer.unobserve(entry.target);}
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+          observer.unobserve(entry.target);
+        }
       });
-    },{threshold:0.2});
-    document.querySelectorAll('.feature,.testimonials,.faq-section, #fawryMachine').forEach(el=>observer.observe(el));
+    }, { threshold: 0.2 });
+    document.querySelectorAll('.feature, #faqSection, #fawryMachine').forEach(el => observer.observe(el));
 
     // زر العودة للأعلى
-    const backToTop=document.getElementById("backToTop");
-    window.addEventListener("scroll",()=>{
-      if(window.scrollY>300){backToTop.style.display="block";}
-      else{backToTop.style.display="none";}
+    const backToTop = document.getElementById("backToTop");
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 300) {
+        backToTop.style.display = "block";
+      } else {
+        backToTop.style.display = "none";
+      }
     });
-    backToTop.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"}));
+    backToTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
   </script>
 </body>
 </html>
