@@ -113,6 +113,23 @@
       0%, 100% { transform: translate(0, 0); }
       50% { transform: translate(1px, 1px); }
     }
+    
+    /* تصميم البرواز الخلفي للنص بحجم مناسب */
+    .text-frame {
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      padding: 25px 30px;
+      margin: 0 auto;
+      max-width: fit-content;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    
     .logo {
       font-size: clamp(3rem, 10vw, 5rem);
       font-family: 'Amiri', serif;
@@ -130,12 +147,14 @@
       margin-bottom: 10px;
       font-family: 'Cairo', sans-serif;
       letter-spacing: 1px;
+      text-align: center;
     }
     .subtitle {
       font-size: clamp(1rem, 3vw, 1.5rem);
       font-weight: 400;
       opacity: 0.9;
       max-width: 90%;
+      text-align: center;
     }
 
     .content { padding: 40px 0; }
@@ -458,6 +477,11 @@
         padding: 0 15px;
       }
       
+      .text-frame {
+        padding: 20px;
+        border-radius: 15px;
+      }
+      
       .logo {
         margin-bottom: 15px;
       }
@@ -552,9 +576,12 @@
 
   <div class="container">
     <div class="header">
-      <div class="logo"><i class="fas fa-gift"></i></div>
-      <div class="title">مفاجــــأة الـــــرواد!</div>
-      <div class="subtitle">أحدث ماكينة لفوري في مكتبة الرواد</div>
+      <!-- إضافة البرواز الخلفي للنص -->
+      <div class="text-frame">
+        <div class="logo"><i class="fas fa-gift"></i></div>
+        <div class="title">مفاجــــأة الـــــرواد!</div>
+        <div class="subtitle">أحدث ماكينة لفوري في مكتبة الرواد</div>
+      </div>
     </div>
 
     <div class="content">
